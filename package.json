@@ -14,6 +14,9 @@
       "name": "ghq-open-with-code",
       "title": "ghq Open with Code",
       "description": "ghq list",
+      "keywords": [
+        "ghcode"
+      ],
       "mode": "view"
     }
   ],
@@ -45,7 +48,7 @@
   },
   "scripts": {
     "build": "ray build -e dist",
-    "dev": "PATH=/opt/homebrew/bin/ & ray develop",
+    "dev": "ray develop",
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
     "publish": "ray publish"
