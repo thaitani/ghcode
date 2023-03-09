@@ -1,9 +1,22 @@
-import { Action, ActionPanel, Icon, List, closeMainWindow } from "@raycast/api";
+import {
+  Action,
+  ActionPanel,
+  Icon,
+  Image,
+  List,
+  Toast,
+  clearSearchBar,
+  closeMainWindow,
+  popToRoot,
+  showToast,
+} from "@raycast/api";
 import { exec, execSync } from "child_process";
 import { useEffect, useState } from "react";
 
+const githubIcon: Image.ImageLike = { source: { light: "github-mark.png", dark: "github-mark-white.png" } };
 type GhqRepo = {
-  repName: string;
+  icon: Image.ImageLike;
+  subPath: string;
   fullPath: string;
 };
 
@@ -18,12 +31,18 @@ export default function Command() {
         return;
       }
       const ghqRoot = execSync("ghq root").toString().split("\n")[0];
-      const repoList = stdout.split("\n").map((line) => {
-        return {
-          repName: line.replace(ghqRoot, ""),
-          fullPath: line,
-        } as GhqRepo;
-      });
+      const repoList = stdout
+        .split("\n")
+        .filter((e) => e)
+        .map((line) => {
+          const subPath = line.replace(`${ghqRoot}/`, "");
+          const icon = subPath.startsWith("github.com") ? githubIcon : Icon.BlankDocument;
+          return {
+            icon,
+            subPath,
+            fullPath: line,
+          } as GhqRepo;
+        });
 
       setGhqList(repoList);
     });
@@ -37,17 +56,21 @@ export default function Command() {
     <List onSearchTextChange={(query) => setQuery(query)}>
       {ghqList?.map((ghq) => (
         <List.Item
+          icon={ghq.icon}
           key={ghq.fullPath}
-          title={ghq.repName}
+          title={ghq.subPath}
           subtitle={ghq.fullPath}
           actions={
             <ActionPanel>
               <Action
                 title={"Open With Code"}
                 icon={Icon.Code}
-                onAction={() => {
+                onAction={async () => {
                   execSync(`code ${ghq.fullPath}`);
-                  closeMainWindow({ clearRootSearch: true });
+                  await showToast({ style: Toast.Style.Success, title: "Success", message: "Open VS Code" });
+                  await clearSearchBar({ forceScrollToTop: true });
+                  await popToRoot({ clearSearchBar: true });
+                  await closeMainWindow({ clearRootSearch: true });
                 }}
               ></Action>
               <Action.ShowInFinder path={ghq.fullPath}></Action.ShowInFinder>
