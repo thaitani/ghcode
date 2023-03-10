@@ -13,7 +13,7 @@
     {
       "name": "open-with-code",
       "title": "Open with Code",
-      "description": "Open With Code",
+      "description": "Open With Visual Studio Code",
       "keywords": [
         "ghcode"
       ],
