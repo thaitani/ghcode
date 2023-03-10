@@ -1,14 +1,4 @@
-import {
-  Action,
-  ActionPanel,
-  Icon,
-  List,
-  Toast,
-  clearSearchBar,
-  closeMainWindow,
-  popToRoot,
-  showToast,
-} from "@raycast/api";
+import { Action, ActionPanel, Icon, List, Toast, closeMainWindow, popToRoot, showToast } from "@raycast/api";
 import { useMemo, useState } from "react";
 import { ghqList } from "./utils/ghq";
 import { openWithCode } from "./utils/code";
@@ -34,7 +24,6 @@ export default function Command() {
                 onAction={async () => {
                   openWithCode(ghq.fullPath);
                   await showToast({ style: Toast.Style.Success, title: "Success", message: "Open VS Code" });
-                  await clearSearchBar({ forceScrollToTop: true });
                   await popToRoot({ clearSearchBar: true });
                   await closeMainWindow({ clearRootSearch: true });
                 }}
