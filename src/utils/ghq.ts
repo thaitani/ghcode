@@ -7,7 +7,7 @@ export type GhqRepo = {
   fullPath: string;
   readme: string;
 };
-const fetchGhqList = (query: string): GhqRepo[] => {
+export const fetchGhqList = (query: string): GhqRepo[] => {
   const githubIcon: Image.ImageLike = { source: { light: "github-mark.png", dark: "github-mark-white.png" } };
   return execSyncWrap(`ghq list -p ${query}`)
     .split("\n")
@@ -25,5 +25,3 @@ const fetchGhqList = (query: string): GhqRepo[] => {
 };
 
 const ghqRoot = () => execSyncWrap("ghq root").toString().split("\n")[0];
-
-export { fetchGhqList };

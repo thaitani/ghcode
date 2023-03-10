@@ -3,7 +3,7 @@ import { join } from "path";
 
 /// GitHub のREADME読み込み順に準拠
 /// https://docs.github.com/ja/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
-const readReadme = (dirPath: string): string => {
+export const readReadme = (dirPath: string): string => {
   const targetFileName = "README.md";
   const targets = [
     join(dirPath, ".github", targetFileName),
@@ -17,5 +17,3 @@ const readReadme = (dirPath: string): string => {
   }
   return "";
 };
-
-export { readReadme };
