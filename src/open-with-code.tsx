@@ -1,7 +1,6 @@
 import {
   Action,
   ActionPanel,
-  Detail,
   Icon,
   List,
   Toast,
@@ -13,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { GhqRepo, fetchGhqList } from "./ghq";
 import { openWithCode } from "./code";
+import { readReadme } from "./readme";
 
 export default function Command() {
   const [ghqList, setGhqList] = useState<GhqRepo[]>([]);
@@ -23,13 +23,13 @@ export default function Command() {
   }, [query]);
 
   return (
-    <List onSearchTextChange={setQuery}>
+    <List onSearchTextChange={setQuery} isShowingDetail>
       {ghqList?.map((ghq) => (
         <List.Item
           icon={ghq.icon}
           key={ghq.fullPath}
           title={ghq.subPath}
-          subtitle={ghq.fullPath}
+          detail={<List.Item.Detail markdown={readReadme(ghq.fullPath)} />}
           actions={
             <ActionPanel>
               <Action

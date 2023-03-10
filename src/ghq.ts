@@ -15,7 +15,7 @@ const fetchGhqList = (query: string): GhqRepo[] => {
       const icon = subPath.startsWith("github.com") ? githubIcon : Icon.BlankDocument;
       return {
         icon,
-        subPath,
+        subPath: subPath.replace("github.com/", ""),
         fullPath: line,
       } as GhqRepo;
     });
