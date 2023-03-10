@@ -10,9 +10,9 @@ import {
   showToast,
 } from "@raycast/api";
 import { useEffect, useState } from "react";
-import { GhqRepo, fetchGhqList } from "./ghq";
-import { openWithCode } from "./code";
-import { readReadme } from "./readme";
+import { GhqRepo, fetchGhqList } from "./utils/ghq";
+import { openWithCode } from "./utils/code";
+import { readReadme } from "./utils/readme";
 
 export default function Command() {
   const [ghqList, setGhqList] = useState<GhqRepo[]>([]);
