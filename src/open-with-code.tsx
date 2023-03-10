@@ -9,18 +9,15 @@ import {
   popToRoot,
   showToast,
 } from "@raycast/api";
-import { useEffect, useState } from "react";
-import { GhqRepo, fetchGhqList } from "./utils/ghq";
+import { useMemo, useState } from "react";
+import { fetchGhqList } from "./utils/ghq";
 import { openWithCode } from "./utils/code";
 import { readReadme } from "./utils/readme";
 
 export default function Command() {
-  const [ghqList, setGhqList] = useState<GhqRepo[]>([]);
   const [query, setQuery] = useState<string>("");
 
-  useEffect(() => {
-    setGhqList(fetchGhqList(query));
-  }, [query]);
+  const ghqList = useMemo(() => fetchGhqList(query), [query]);
 
   return (
     <List onSearchTextChange={setQuery} isShowingDetail>
