@@ -10,17 +10,17 @@ import {
   showToast,
 } from "@raycast/api";
 import { useMemo, useState } from "react";
-import { fetchGhqList } from "./utils/ghq";
+import { ghqList } from "./utils/ghq";
 import { openWithCode } from "./utils/code";
 
 export default function Command() {
   const [query, setQuery] = useState<string>("");
 
-  const ghqList = useMemo(() => fetchGhqList(query), [query]);
+  const _ghqList = useMemo(() => ghqList(query), [query]);
 
   return (
     <List onSearchTextChange={setQuery} isShowingDetail>
-      {ghqList?.map((ghq) => (
+      {_ghqList.map((ghq) => (
         <List.Item
           icon={ghq.icon}
           key={ghq.fullPath}
