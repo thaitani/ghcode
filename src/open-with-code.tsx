@@ -1,6 +1,7 @@
 import {
   Action,
   ActionPanel,
+  Detail,
   Icon,
   List,
   Toast,
@@ -22,7 +23,7 @@ export default function Command() {
   }, [query]);
 
   return (
-    <List onSearchTextChange={(query) => setQuery(query)}>
+    <List onSearchTextChange={setQuery}>
       {ghqList?.map((ghq) => (
         <List.Item
           icon={ghq.icon}
