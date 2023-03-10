@@ -1,9 +1,11 @@
 import { Icon, Image } from "@raycast/api";
 import { execSyncWrap } from "./command";
+import { readReadme } from "./readme";
 export type GhqRepo = {
   icon: Image.ImageLike;
   subPath: string;
   fullPath: string;
+  readme: string;
 };
 const fetchGhqList = (query: string): GhqRepo[] => {
   const githubIcon: Image.ImageLike = { source: { light: "github-mark.png", dark: "github-mark-white.png" } };
@@ -17,6 +19,7 @@ const fetchGhqList = (query: string): GhqRepo[] => {
         icon,
         subPath: subPath.replace("github.com/", ""),
         fullPath: line,
+        readme: readReadme(line),
       } as GhqRepo;
     });
 };

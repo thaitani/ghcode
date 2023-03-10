@@ -12,7 +12,6 @@ import {
 import { useMemo, useState } from "react";
 import { fetchGhqList } from "./utils/ghq";
 import { openWithCode } from "./utils/code";
-import { readReadme } from "./utils/readme";
 
 export default function Command() {
   const [query, setQuery] = useState<string>("");
@@ -26,7 +25,7 @@ export default function Command() {
           icon={ghq.icon}
           key={ghq.fullPath}
           title={ghq.subPath}
-          detail={<List.Item.Detail markdown={readReadme(ghq.fullPath)} />}
+          detail={<List.Item.Detail markdown={ghq.readme} />}
           actions={
             <ActionPanel>
               <Action
