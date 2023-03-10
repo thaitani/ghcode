@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "ghq-with-vscode",
-  "title": "ghq With Code",
+  "name": "ghq-kit",
+  "title": "ghq Kit",
   "description": "An admin panel to create, read, update, and delete user entities.",
   "icon": "icon.png",
   "author": "thomas",
@@ -11,9 +11,9 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "ghq-open-with-code",
-      "title": "ghq Open with Code",
-      "description": "ghq list",
+      "name": "open-with-code",
+      "title": "Open with Code",
+      "description": "Open With Code",
       "keywords": [
         "ghcode"
       ],
