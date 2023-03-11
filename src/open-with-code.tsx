@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Icon, List, Toast, closeMainWindow, popToRoot, showToast } from "@raycast/api";
+import { Action, ActionPanel, Icon, List, closeMainWindow, popToRoot } from "@raycast/api";
 import { useMemo, useState } from "react";
 import { ghqList } from "./utils/ghq";
 import { openWithCode } from "./utils/code";
@@ -7,7 +7,6 @@ export default function Command() {
   const [query, setQuery] = useState<string>("");
 
   const _ghqList = useMemo(() => ghqList(query), [query]);
-
   return (
     <List onSearchTextChange={setQuery} isShowingDetail>
       {_ghqList.map((ghq) => (
@@ -23,7 +22,6 @@ export default function Command() {
                 icon={Icon.Code}
                 onAction={async () => {
                   openWithCode(ghq.fullPath);
-                  await showToast({ style: Toast.Style.Success, title: "Success", message: "Open VS Code" });
                   await popToRoot({ clearSearchBar: true });
                   await closeMainWindow({ clearRootSearch: true });
                 }}
