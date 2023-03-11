@@ -1,12 +1,16 @@
+import fetch from "node-fetch";
 import { getPreferenceValues } from "@raycast/api";
 import { graphql } from "../gql";
 
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://api.github.com/graphql",
-  headers: { authorization: `Bearer ${getPreferenceValues().githubToken}` },
   cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: "https://api.github.com/graphql",
+    fetch,
+    headers: { authorization: `Bearer ${getPreferenceValues().githubToken}` },
+  }),
 });
 
 const myRepositories = graphql(`
