@@ -1,5 +1,4 @@
 import { getPreferenceValues } from "@raycast/api";
-// import { getPreferenceValues } from "@raycast/api";
 import { graphql } from "../gql";
 
 import { ApolloClient, InMemoryCache } from "@apollo/client";
