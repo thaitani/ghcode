@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query MyRepositories {\n    viewer {\n      login\n      repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n      }\n    }\n  }\n": types.MyRepositoriesDocument,
+    "\n  query MyRepositories($after: String) {\n    viewer {\n      login\n      repositories(first: 100, after: $after) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n        }\n      }\n    }\n  }\n": types.MyRepositoriesDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query MyRepositories {\n    viewer {\n      login\n      repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query MyRepositories {\n    viewer {\n      login\n      repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query MyRepositories($after: String) {\n    viewer {\n      login\n      repositories(first: 100, after: $after) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query MyRepositories($after: String) {\n    viewer {\n      login\n      repositories(first: 100, after: $after) {\n        nodes {\n          name\n          description\n          url\n          sshUrl\n          visibility\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

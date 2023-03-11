@@ -1,25 +1,29 @@
-import { getPreferenceValues } from "@raycast/api";
+// import { getPreferenceValues } from "@raycast/api";
 import { graphql } from "../gql";
 
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
-  headers: { authorization: `Bearer ${getPreferenceValues().githubToken}` },
+  headers: { authorization: `Bearer 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` },
   cache: new InMemoryCache(),
 });
 
 const myRepositories = graphql(`
-  query MyRepositories {
+  query MyRepositories($after: String) {
     viewer {
       login
-      repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      repositories(first: 100, after: $after) {
         nodes {
           name
           description
           url
           sshUrl
           visibility
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
         }
       }
     }
@@ -31,8 +35,8 @@ export type MyRepo = {
   name: string;
 };
 
-export const fetchMyRepositories = async (): Promise<MyRepo[]> => {
-  const { data } = await client.query({ query: myRepositories });
+export const fetchMyRepositories = async (after?: string): Promise<MyRepo[]> => {
+  const { data } = await client.query({ query: myRepositories, variables: { after } });
   const nodes = data.viewer.repositories.nodes;
   if (!nodes) {
     return [];
