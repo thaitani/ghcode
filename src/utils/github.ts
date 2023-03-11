@@ -1,3 +1,4 @@
+import { getPreferenceValues } from "@raycast/api";
 // import { getPreferenceValues } from "@raycast/api";
 import { graphql } from "../gql";
 
@@ -5,7 +6,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
-  headers: { authorization: `Bearer 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` },
+  headers: { authorization: `Bearer ${getPreferenceValues().githubToken}` },
   cache: new InMemoryCache(),
 });
 
