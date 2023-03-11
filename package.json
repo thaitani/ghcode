@@ -23,9 +23,9 @@
   "preferences": [
     {
       "type": "textfield",
-      "name": "endpoint",
-      "title": "Endpoint",
-      "description": "The endpoint of the CRUD API, e.g. https://crudcrud.com/api/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "name": "githubToken",
+      "title": "GitHub Token",
+      "description": "GitHub Classic Token",
       "required": false
     }
   ],

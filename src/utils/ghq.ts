@@ -24,4 +24,6 @@ export const ghqList = (query: string): GhqRepo[] => {
     });
 };
 
+export const ghqGet = (url: string) => execSyncWrap(`ghq get ${url}`);
+
 const ghqRoot = () => execSyncWrap("ghq root").toString().split("\n")[0];
